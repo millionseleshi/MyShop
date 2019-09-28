@@ -1,0 +1,80 @@
+<!DOXTYPE html>
+<head>
+    <title>Login</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link"  [routerLink]="['']">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/product']">Product</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Pricing</a>
+            </li>
+            <li class="nav-item dropdown" dropdown>
+
+                <a class="nav-link dropdown-toggle"  dropdownToggle id="navbarDropdownMenuLink" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false"  aria-controls="dropdown-menu">
+                    Dropdown link
+                </a>
+                <div class="dropdown-menu" *dropdownMenu aria-labelledby="navbarDropdownMenuLink" role="menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item" *ngIf="isLoggedIn==true">
+                <a class="nav-link" (click)="logout()" >Logout</a>
+            </li>
+        </ul>
+
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="card card-signin my-5">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Sign In</h5>
+                    <form class="form-signin" [formGroup]="loginForm" #f="ngForm" (ngSubmit)="login(f.value)">
+
+                        <div *ngIf="errorMessage==true" class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Invalid Username and Password</strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <div class="form-label-group">
+                            <input type="text" id="userName"  formControlName="username"class="form-control" placeholder="User Name">
+                            <label for="userName">User Name</label>
+                        </div>
+
+                        <div class="form-label-group">
+                            <input type="password" id="Password" formControlName="password" class="form-control" placeholder="Password">
+                            <label for="Password">Password</label>
+                        </div>
+
+                        <div class="custom-control custom-checkbox mb-3">
+                            <input type="checkbox" class="custom-control-input" id="customCheck1" formControlName="remember">
+                            <label class="custom-control-label" for="customCheck1">Remember password</label>
+                        </div>
+                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>

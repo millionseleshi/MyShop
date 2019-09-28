@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../service/auth-service.service';
 import {Router} from '@angular/router';
+import {ProductService} from '../service/productservice.service';
 
 @Component({
   selector: 'app-product',
@@ -9,11 +10,12 @@ import {Router} from '@angular/router';
 })
 export class ProductComponent implements OnInit {
 
-  constructor(private auth:AuthService,private route:Router) { }
+  constructor(private auth:AuthService,private route:Router,private productService:ProductService) { }
 
   ngOnInit() {
   }
     isLoggedIn=this.auth.isLoggedIn;
+    products:any
 
     logout()
     {
@@ -25,5 +27,16 @@ export class ProductComponent implements OnInit {
                 }
             }
         );
+    }
+
+    allProduct()
+    {
+        this.productService.getProduct().subscribe(
+            (result)=>
+            {
+                console.log(result)
+               return this.products=result;
+            }
+        )
     }
 }
